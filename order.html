@@ -1,0 +1,138 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Liograsella Order</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <img src="logoo.jpg" alt="Liograsella Logo" class="header-logo">
+            <span class="site-name">Liograsella</span>
+        </div>
+        <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="menu.html">Menu</a></li>
+            <li><a href="order.html">Order</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="beans.html">Beans</a></li>
+
+        </ul>
+    </header>
+
+    <h2>Order Now</h2>
+
+    <form class="order-form" action="thankyou.html" method="get">
+        <label>Your Name:</label><br>
+        <input type="text" name="name" required><br><br>
+
+        <!-- 🧁 الحلويات -->
+        <h3>Desserts</h3>
+
+        <p><strong>Lemon Lavender Tart</strong></p>
+        <label>Quantity:</label>
+        <input type="number" name="tart_qty" min="0" value="0"><br><br>
+
+        <p><strong>French Macarons</strong></p>
+        <label>Quantity:</label>
+        <input type="number" name="macarons_qty" min="0" value="0"><br><br>
+
+        <p><strong>San Sebastian Cheesecake</strong></p>
+        <label>Quantity:</label>
+        <input type="number" name="cheesecake_qty" min="0" value="0">
+        <br><br>
+
+        <!-- ☕ المشروبات -->
+        <h3>Drinks</h3>
+
+        <p><strong>Black Coffee</strong></p>
+        <label>Quantity:</label>
+        <input type="number" name="black_coffee_qty" min="0" value="0">
+        <select name="black_coffee_temp">
+            <option value="">-- Choose --</option>
+            <option value="Hot">Hot</option>
+            <option value="Iced">Iced</option>
+        </select><br><br>
+
+        <p><strong>Latte</strong></p>
+        <label>Quantity:</label>
+        <input type="number" name="latte_qty" min="0" value="0">
+        <select name="latte_temp">
+            <option value="">-- Choose --</option>
+            <option value="Hot">Hot</option>
+            <option value="Iced">Iced</option>
+        </select><br><br>
+
+        <p><strong>Matcha Latte</strong></p>
+        <label>Quantity:</label>
+        <input type="number" name="matcha_qty" min="0" value="0">
+        <select name="matcha_temp">
+            <option value="">-- Choose --</option>
+            <option value="Hot">Hot</option>
+            <option value="Iced">Iced</option>
+        </select><br><br>
+
+        <h3>Coffee Beans</h3>
+
+        <p><strong>Liograsella Signature Roast</strong></p>
+        <label>Quantity (250g bags):</label>
+        <input type="number" name="beans_signature_qty" min="0" value="0"><br><br>
+
+        <p><strong>Dark Mocha Blend</strong></p>
+        <label>Quantity (250g bags):</label>
+        <input type="number" name="beans_mocha_qty" min="0" value="0"><br><br>
+
+
+        <!-- ملاحظات وزر الإرسال -->
+        <label>Notes:</label><br>
+        <textarea name="notes" rows="4" placeholder="Anything special?"></textarea><br><br>
+
+        <button type="submit">Send Order</button>
+        <p><strong>Total:</strong> <span id="total">SAR 0</span></p>
+    </form>
+    <script>
+        const prices = {
+            tart: 21,
+            macarons: 19,
+            cheesecake: 23,
+            black: 14,
+            latte: 17,
+            matcha: 19
+        };
+        function updateTotal() {
+            let total = 0;
+            // الكميات من المدخلات
+            const tartQty = document.querySelector('input[name="tart_qty"]').value;
+            const macaronsQty = document.querySelector('input[name="macarons_qty"]').value;
+            const cheesecakeQty = document.querySelector('input[name="cheesecake_qty"]').value;
+            const blackQty = document.querySelector('input[name="black_coffee_qty"]').value;
+            const latteQty = document.querySelector('input[name="latte_qty"]').value;
+            const matchaQty = document.querySelector('input[name="matcha_qty"]').value;
+            const signatureQty = document.querySelector('input[name="beans_signature_qty"]').value;
+            const mochaQty = document.querySelector('input[name="beans_mocha_qty"]').value;
+            // الحساب
+            total += signatureQty * 45; // SAR 45 للبن الأول
+            total += mochaQty * 48;     // SAR 48 للبن الثاني
+            total += tartQty * prices.tart;
+            total += macaronsQty * prices.macarons;
+            total += cheesecakeQty * prices.cheesecake;
+            total += blackQty * prices.black;
+            total += latteQty * prices.latte;
+            total += matchaQty * prices.matcha;
+            document.getElementById("total").textContent = "SAR " + total;
+        }
+        // حدث تلقائي عند تغيير أي قيمة
+        document.querySelectorAll('input').forEach(el => {
+            el.addEventListener('input', updateTotal);
+        });
+    </script>
+    <footer>
+        <p>Contact us: liograsella@email.com</p>
+        <p>Phone: +966 555 555 555</p>
+        <p>© 2025 Liograsella</p>
+    </footer>
+
+</body>
+</html>
